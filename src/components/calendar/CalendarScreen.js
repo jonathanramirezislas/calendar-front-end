@@ -22,8 +22,25 @@ const events=[{
 
 export const CalendarScreen = () => {
 
+    //this events are from BigCalendar 
+    const onDoubleClick = (e) => {
+         console.log(e);
+    }
+
+    const onSelectEvent = (e) => {
+        console.log(e)
+    }
+
+    const onViewChange = (e) => {
+        console.log(e)
+    }
+
+    const onSelectSlot = (e) => {
+         console.log(e)
+    }
+
+    //Styles for the events
     const eventStyleGetter=(even, start, end, isSelected) =>{
-        
         const style={
             backgroundColor:'#367cF7',
             borderRadius: '0px',
@@ -31,11 +48,9 @@ export const CalendarScreen = () => {
             display: 'block',
             color:'white'
         }
-
         return {
             style
-        }
-    
+        }  
     };
 
     return (
@@ -48,7 +63,17 @@ export const CalendarScreen = () => {
                     startAccessor="start"
                     endAccessor="end"
                     style={{ height: 500 }}
-                 />
+                    messages={messages}
+                    messages={ messages }
+                    eventPropGetter={ eventStyleGetter }
+                    onDoubleClickEvent={ onDoubleClick }
+                    onSelectEvent={ onSelectEvent }
+                    onView={ onViewChange }
+                    onSelectSlot={ onSelectSlot }
+                    selectable={ true }
+
+
+                />
 
             </div>
     )
