@@ -4,10 +4,12 @@ import 'moment/locale/es';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'; //styles for calander
 import { messages } from '../helpers/calendar-messages-es';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Navbar } from '../ui/Navbar';
 import { CalendarModal } from './CalendarModal';
 import { CalendarEvent } from './CalendarEvent';
+import { uiOpenModal } from '../../actions/ui';
 
 moment.locale('es'); //configure to spanish moment
 
@@ -25,10 +27,11 @@ const events = [
 export const CalendarScreen = () => {
 	//in order to save the view if the user reload page
 	const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
+    const dispatch = useDispatch();
 
 	//this events are from BigCalendar
 	const onDoubleClick = (e) => {
-		console.log(e);
+		dispatch( uiOpenModal() );  //to open modal
 	};
 
 	const onSelectEvent = (e) => {
