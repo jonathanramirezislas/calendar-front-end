@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent } from '../../actions/events';
+import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
 
 const customStyles = {
 	content: {
@@ -55,15 +55,19 @@ export const CalendarModal = () => {
         if ( title.trim().length < 2 ) {
             return setTitleValid(false);
         }
-        //add new event
-        dispatch( eventAddNew({
-            ...formValues,
-            id: new Date().getTime(),
-            user: {
-                _id: '123',
-                name: 'Jonathan'
-            }
-        }) );
+
+        if ( activeEvent ) {//if there is a a activeEvent
+            dispatch( eventUpdated( formValues ) ) //update
+        } else {//otherwise create one
+            dispatch( eventAddNew({
+                ...formValues,
+                id: new Date().getTime(),
+                user: {
+                    _id: '123',
+                    name: 'Jonathan'
+                }
+            }) );
+        }
 
 		setTitleValid(true); //the title is valid
 		closeModal();
@@ -117,6 +121,7 @@ export const CalendarModal = () => {
         className="modal"
         overlayClassName="modal-background"
       >
+            <h1>{activeEvent ? 'Update Note': 'New Note'}</h1>
           <hr />
           <form
               className="container"
@@ -175,7 +180,7 @@ export const CalendarModal = () => {
                   className="btn btn-outline-primary btn-block"
               >
                   <i className="far fa-save"></i>
-                  <span> Guardar</span>
+                  <span> Save</span>
               </button>
 
           </form>

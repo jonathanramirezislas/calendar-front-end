@@ -38,6 +38,7 @@ export const calendarReducer = ( state = initialState, action ) => {
                 ]
             }
     
+        //deactivate the active note
         case types.eventClearActiveEvent:
             return {
                 ...state,
@@ -57,9 +58,9 @@ export const calendarReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 events: state.events.filter(
-                    e => ( e.id !== state.activeEvent.id )
+                    e => ( e.id !== state.activeEvent.id )//delete by active note 
                 ),
-                activeEvent: null
+                activeEvent: null //due to was activated
             }
 
         default:

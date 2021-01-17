@@ -11,7 +11,8 @@ import { CalendarModal } from './CalendarModal';
 import { CalendarEvent } from './CalendarEvent';
 import { uiOpenModal } from '../../actions/ui';
 import { AddNewFab } from '../ui/AddNewFab';
-import { eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
+import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale('es'); //configure to spanish moment
 
@@ -46,8 +47,8 @@ export const CalendarScreen = () => {
 	};
 
 	const onSelectSlot = (e) => {
-		console.log(e);
-	};
+        dispatch( eventClearActiveEvent() ); //clear event active
+    }
 
 	//Styles for the events
 	const eventStyleGetter = (even, start, end, isSelected) => {
@@ -84,7 +85,11 @@ export const CalendarScreen = () => {
 				view={lastView}
 				components={{ event: CalendarEvent }}
 			/>
-				<AddNewFab/>
+				<AddNewFab />
+            {/*if there is a active note we show the component delete (button) */}
+            {
+                (activeEvent) && <DeleteEventFab />
+            }
             <CalendarModal/>
 
 		</div>
