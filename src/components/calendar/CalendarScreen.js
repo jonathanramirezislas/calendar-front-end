@@ -10,21 +10,21 @@ import { Navbar } from '../ui/Navbar';
 import { CalendarModal } from './CalendarModal';
 import { CalendarEvent } from './CalendarEvent';
 import { uiOpenModal } from '../../actions/ui';
+import { AddNewFab } from '../ui/AddNewFab';
+import { eventSetActive } from '../../actions/events';
 
 moment.locale('es'); //configure to spanish moment
 
 const localizer = momentLocalizer(moment);
 
-const events = [
-	{
-		title: 'Cumpleaños de Jona',
-		start: moment().toDate(),
-		end: moment().add(2, 'hours').toDate(),
-		bgcolor: '#fafafa',
-	},
-];
+
 
 export const CalendarScreen = () => {
+
+	//get events from store
+    const { events, activeEvent } = useSelector( state => state.calendar );
+
+
 	//in order to save the view if the user reload page
 	const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
     const dispatch = useDispatch();
@@ -32,10 +32,12 @@ export const CalendarScreen = () => {
 	//this events are from BigCalendar
 	const onDoubleClick = (e) => {
 		dispatch( uiOpenModal() );  //to open modal
+		
 	};
 
 	const onSelectEvent = (e) => {
-		console.log(e);
+	//	console.log(e);
+		dispatch( eventSetActive( e ) );
 	};
 
 	const onViewChange = (e) => {
@@ -82,7 +84,7 @@ export const CalendarScreen = () => {
 				view={lastView}
 				components={{ event: CalendarEvent }}
 			/>
-            
+				<AddNewFab/>
             <CalendarModal/>
 
 		</div>

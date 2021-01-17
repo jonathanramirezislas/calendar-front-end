@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import moment from "moment"; 
 import Swal from 'sweetalert2';
@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import { uiCloseModal } from '../../actions/ui';
+import { eventAddNew, eventClearActiveEvent } from '../../actions/events';
 
 const customStyles = {
 	content: {
@@ -33,13 +34,13 @@ const initEvent = {
 
 export const CalendarModal = () => {
     const { modalOpen } = useSelector( state => state.ui );
+    const { activeEvent } = useSelector( state => state.calendar );
     const dispatch = useDispatch();
 
     const [dateStart, setDateStart] = useState(now.toDate());    
 	const [dateEnd, setDateEnd] = useState(nowPlus1.toDate()); 
 	const [titleValid, setTitleValid] = useState(true) 
 	const [formValues, setFormValues] = useState( initEvent );
-    const [isOpen, setIsOpen] = useState(true);
 
 	const {notes,title, start, end} = formValues;
 
@@ -53,11 +54,33 @@ export const CalendarModal = () => {
 		}
         if ( title.trim().length < 2 ) {
             return setTitleValid(false);
-		}
+        }
+        //add new event
+        dispatch( eventAddNew({
+            ...formValues,
+            id: new Date().getTime(),
+            user: {
+                _id: '123',
+                name: 'Jonathan'
+            }
+        }) );
+
 		setTitleValid(true); //the title is valid
 		closeModal();
 		console.log(formValues)
     }
+
+
+    useEffect(() => {
+        //Due to first time activeEvent is null we check because we can not set to form values in null
+        if ( activeEvent ) {//each time when we set activeEvent by clicking(two times) on the note
+            setFormValues( activeEvent );
+        } else {
+            setFormValues( initEvent );
+        }
+    }, [activeEvent, setFormValues])
+
+
 
 	const handleInputChange = ({ target }) => {
         setFormValues({
@@ -80,7 +103,9 @@ export const CalendarModal = () => {
 		})
     }
 	const closeModal = () => {
-		dispatch(uiCloseModal()); //close modal
+        dispatch(uiCloseModal()); //close modal
+        dispatch(eventClearActiveEvent());//quit active note 
+        setFormValues(initEvent);//reset form
 	};
 
 	return (
