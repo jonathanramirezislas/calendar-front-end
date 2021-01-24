@@ -3,7 +3,7 @@ import moment from 'moment';
 import 'moment/locale/es';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'; //styles for calander
-import { messages } from '../helpers/calendar-messages-es';
+import { messages } from '../../helpers/calendar-messages-es';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Navbar } from '../ui/Navbar';
@@ -74,7 +74,6 @@ export const CalendarScreen = () => {
 				startAccessor="start"
 				endAccessor="end"
 				style={{ height: 500 }}
-				messages={messages}
 				messages={messages}
 				eventPropGetter={eventStyleGetter}
 				onDoubleClickEvent={onDoubleClick}
