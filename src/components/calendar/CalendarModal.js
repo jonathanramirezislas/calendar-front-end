@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventUpdated } from '../../actions/events';
 
 const customStyles = {
 	content: {
@@ -59,14 +59,7 @@ export const CalendarModal = () => {
         if ( activeEvent ) {//if there is a a activeEvent
             dispatch( eventUpdated( formValues ) ) //update
         } else {//otherwise create one
-            dispatch( eventAddNew({
-                ...formValues,
-                id: new Date().getTime(),
-                user: {
-                    _id: '123',
-                    name: 'Jonathan'
-                }
-            }) );
+            dispatch( eventStartAddNew(formValues));
         }
 
 		setTitleValid(true); //the title is valid
