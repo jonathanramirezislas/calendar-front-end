@@ -1,16 +1,23 @@
 export const types = {
 
+    //MODAL
     uiOpenModal: '[ui] Open modal',
     uiCloseModal: '[ui] Close modal',
 
+    //EVENT TO SHOW
     eventSetActive: '[event] Set Active',
-    evetStartAddNew: '[event] Start add new',
-    eventAddNew: '[event] Add new',
     eventClearActiveEvent: '[event] Clear active event',
-    eventUpdated: '[event] Event updated',
-    eventDeleted: '[event] Event deleted',
 
+    eventLogout: '[event] Logout event',
+    
+    //CRUD
+    eventLoaded: '[event] Events loaded', //read
+    evetStartAddNew: '[event] Start add new',//create
+    eventAddNew: '[event] Add new',
+    eventUpdated: '[event] Event updated',//update
+    eventDeleted: '[event] Event deleted',//delete
 
+    //auth
     authCheckingFinish: '[auth] Finish checking login state',
     authStartLogin: '[auth] Start login',
     authLogin: '[auth] Login',

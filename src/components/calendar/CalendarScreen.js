@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/es';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
@@ -11,7 +11,7 @@ import { CalendarModal } from './CalendarModal';
 import { CalendarEvent } from './CalendarEvent';
 import { uiOpenModal } from '../../actions/ui';
 import { AddNewFab } from '../ui/AddNewFab';
-import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive, eventStartLoading } from '../../actions/events';
 import { DeleteEventFab } from '../ui/DeleteEventFab';
 
 moment.locale('es'); //configure to spanish moment
@@ -28,7 +28,17 @@ export const CalendarScreen = () => {
 
 	//in order to save the view if the user reload page
 	const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'month');
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	
+
+
+	useEffect(() => {
+		//GET EVENTS
+        dispatch( eventStartLoading() );
+
+    }, [ dispatch ])
+
+
 
 	//this events are from BigCalendar
 	const onDoubleClick = (e) => {
