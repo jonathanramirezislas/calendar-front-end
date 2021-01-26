@@ -24,6 +24,8 @@ export const CalendarScreen = () => {
 
 	//get events from store
     const { events, activeEvent } = useSelector( state => state.calendar );
+	//get user from store
+	const { uid } = useSelector( state => state.auth );
 
 
 	//in order to save the view if the user reload page
@@ -61,9 +63,9 @@ export const CalendarScreen = () => {
     }
 
 	//Styles for the events
-	const eventStyleGetter = (even, start, end, isSelected) => {
+	const eventStyleGetter = (event, start, end, isSelected) => {
 		const style = {
-			backgroundColor: '#367cF7',
+            backgroundColor: ( uid === event.user._id ) ? '#367CF7' : '#465660', //if the user is the ow ner event we set a blue color
 			borderRadius: '0px',
 			opacity: 0.8,
 			display: 'block',
