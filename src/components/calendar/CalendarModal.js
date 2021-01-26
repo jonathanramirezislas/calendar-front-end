@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import Modal from 'react-modal';
 import DateTimePicker from 'react-datetime-picker';
 import { uiCloseModal } from '../../actions/ui';
-import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdate } from '../../actions/events';
 
 const customStyles = {
 	content: {

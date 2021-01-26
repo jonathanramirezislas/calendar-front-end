@@ -12,7 +12,7 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
         return fetch( url, {
             method,
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
             },
             body: JSON.stringify( data )
         });
@@ -29,7 +29,7 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
         return fetch( url, {
             method,
             headers: {
-                'x-token': token 
+                'x-token': token ,
             }
         });
     } else {
