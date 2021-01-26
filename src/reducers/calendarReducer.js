@@ -8,7 +8,7 @@ import { types } from '../types/types';
 //     notes: 'Comprar el pastel',
 //     user: {
 //         _id: '123',
-//         name: 'Fernando'
+//         name: 'Jonathan'
 //     }
 // }
 
@@ -67,7 +67,13 @@ export const calendarReducer = ( state = initialState, action ) => {
                 ...state,
                 events: [ ...action.payload ] //..spread all events
             }
-    
+        
+        
+        case types.eventLogout:
+            return {
+                ...initialState //CLEAN EVENTS GO TO THE DEFAULT STATE  ↑
+            }
+
 
         default:
             return state;

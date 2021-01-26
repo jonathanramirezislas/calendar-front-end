@@ -6,8 +6,7 @@ export const types = {
 
     //EVENT TO SHOW
     eventSetActive: '[event] Set Active',
-    eventClearActiveEvent: '[event] Clear active event',
-
+    
     eventLogout: '[event] Logout event',
     
     //CRUD
@@ -24,6 +23,7 @@ export const types = {
     authStartRegister: '[auth] Start Register',
     authStartStartTokenRenew: '[auth] Start token renew',
     authLogout: '[auth] Logout',
-
+    eventClearActiveEvent: '[event] Clear active event',//CLEAN EVENS FROM STORE
+    
 
 }

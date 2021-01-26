@@ -71,7 +71,7 @@ const eventLoaded = (events) => ({
     payload: events
 })
 
-            /** UPDATE EVENTS**/
+            /** UPDATE EVENT**/
 
 export const eventStartUpdate = ( event ) => {
     return async(dispatch) => {
@@ -99,6 +99,37 @@ const eventUpdated = ( event ) => ({
     payload: event
 });
 
+            /** DELETE  EVENT**/
+
+export const eventStartDelete = () => {
+    return async ( dispatch, getState ) => {
+        //GET event from store wich is active
+        const { id } = getState().calendar.activeEvent;
+        try {
+            const resp = await fetchConToken(`events/${ id }`, {}, 'DELETE' );
+            const body = await resp.json();
+
+            if ( body.ok ) {
+                dispatch( eventDeleted() );
+            } else {
+                Swal.fire('Error', body.msg, 'error');
+            }
+
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+}
+
+
+const eventDeleted = () => ({ type: types.eventDeleted });
+
+
+            /** SET/CLEAR  EVENT ACTIVE**/
+
+
 export const eventSetActive = (event) => ({
     type: types.eventSetActive,
     payload: event
@@ -108,9 +139,5 @@ export const eventClearActiveEvent = () => ({
      type: types.eventClearActiveEvent 
 });
 
-
-export const eventDeleted = () => ({
-     type: types.eventDeleted 
-});
-
-
+//CLEAN EVENTS 
+export const eventLogout =() => ({ type: types.eventLogout });
