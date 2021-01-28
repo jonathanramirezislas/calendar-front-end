@@ -1,9 +1,9 @@
 
 
-# Confunsion Restaurant
+# Calendar 
     
 
-Calendar iswhere you can save notes.
+Calendar is a project where you can save notes.
 
 ## 📢 Requirements
 - Node JS 12.16.1 _(Recommended)_
@@ -31,7 +31,7 @@ Calendar iswhere you can save notes.
 - [React](https://es.reactjs.org) 
 - [react-modal](https://www.npmjs.com/package/react-modal)
 - [react-redux](https://react-redux.js.org)
-- [sweetalert2](hhttps://www.npmjs.com/package/sweetalert2)
+- [sweetalert2](https://www.npmjs.com/package/sweetalert2)
 - [react-big-calendar](https://jquense.github.io/react-big-calendar/examples/index.html)
 - [react-datetime-picker](https://www.npmjs.com/package/react-datetime-picker)
 - [momentjs](https://momentjs.com/)
@@ -45,7 +45,7 @@ Calendar iswhere you can save notes.
 
 ## 🗄️ Backend Implementations
 
-- **[goToBackEnd](https://github.com/jonathanramirezislas/calendar-back-end)
+- 👉[goToBackEnd](https://github.com/jonathanramirezislas/calendar-back-end)
 
 
 ## Authors
